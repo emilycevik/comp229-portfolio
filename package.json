@@ -1,0 +1,44 @@
+{
+  "name": "comp229-portfolio",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "vite": "npm:rolldown-vite@7.1.12"
+  },
+  "overrides": {
+    "vite": "npm:rolldown-vite@7.1.12"
+  },
+  "description": "This project implements a full backend API for a personal portfolio web application using **Node.js**, **Express**, **MongoDB**, and **JWT authentication**.",
+  "main": "index.js",
+  "dependencies": {
+    "ansis": "^4.1.0",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "detect-libc": "^2.1.1",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "fdir": "^6.5.0",
+    "jsonwebtoken": "^9.0.2",
+    "lightningcss": "^1.30.1",
+    "lightningcss-win32-x64-msvc": "^1.30.1",
+    "mongoose": "^8.19.1",
+    "morgan": "^1.10.1",
+    "nanoid": "^3.3.11",
+    "picocolors": "^1.1.1",
+    "picomatch": "^4.0.3",
+    "postcss": "^8.5.6",
+    "rolldown": "^1.0.0-beta.39",
+    "source-map-js": "^1.2.1",
+    "tinyglobby": "^0.2.15"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

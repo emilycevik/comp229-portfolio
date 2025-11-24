@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { api } from "../../api/axios";
 import { useAuth } from "../../context/AuthContext";
 
 export default function UsersAdmin() {
@@ -7,13 +6,20 @@ export default function UsersAdmin() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    api
-      .get("/api/users", { headers: { Authorization: `Bearer ${token}` } })
-      .then((res) => setUsers(res.data))
-      .catch(() => alert("Only admin can view users"));
+    // 🔥 Lazy-load axios only when this page actually opens
+    import("../../api/axios").then(({ api }) => {
+      api
+        .get("/api/users", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => setUsers(res.data))
+        .catch(() => alert("Only admin can view users"));
+    });
   }, [token]);
 
   const handleDelete = async (id) => {
+    // 🔥 Lazy-load axios here too
+    const { api } = await import("../../api/axios");
     await api.delete(`/api/users/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });

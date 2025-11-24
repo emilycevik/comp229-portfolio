@@ -1,23 +1,34 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
-import ProjectsAdmin from "./pages/admin/ProjectsAdmin";
-import ContactsAdmin from "./pages/admin/ContactsAdmin";
-import EducationsAdmin from "./pages/admin/EducationsAdmin";
-import UsersAdmin from "./pages/admin/UsersAdmin";
+import React, { Suspense } from "react";
+
+// 🔥 Lazy-loaded pages (performance optimization)
+const SignIn = React.lazy(() => import("./pages/SignIn"));
+const SignUp = React.lazy(() => import("./pages/SignUp"));
+const ProjectsAdmin = React.lazy(() =>
+  import("./pages/admin/ProjectsAdmin")
+);
+const ContactsAdmin = React.lazy(() =>
+  import("./pages/admin/ContactsAdmin")
+);
+const EducationsAdmin = React.lazy(() =>
+  import("./pages/admin/EducationsAdmin")
+);
+const UsersAdmin = React.lazy(() => import("./pages/admin/UsersAdmin"));
+
 import { useAuth } from "./context/AuthContext";
 
+// Home Component
 function Home() {
   return (
     <div style={{ padding: "1rem" }}>
       <h1>Welcome to the Portfolio Admin Dashboard</h1>
-      <p>Select a page from the navigation above.</p>
+      <p>Select a page from the navigation above. This text was updated for CI/CD demo.</p>
     </div>
   );
 }
 
 export default function App() {
-  const { signout } = useAuth(); // ✅ enables logout
+  const { signout } = useAuth();
 
   return (
     <BrowserRouter>
@@ -44,15 +55,18 @@ export default function App() {
         </button>
       </nav>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/admin/projects" element={<ProjectsAdmin />} />
-        <Route path="/admin/educations" element={<EducationsAdmin />} />
-        <Route path="/admin/contacts" element={<ContactsAdmin />} />
-        <Route path="/admin/users" element={<UsersAdmin />} />
-      </Routes>
+      {/* 🔥 Suspense loading fallback for lazy components */}
+      <Suspense fallback={<div style={{ padding: "1rem" }}>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/admin/projects" element={<ProjectsAdmin />} />
+          <Route path="/admin/educations" element={<EducationsAdmin />} />
+          <Route path="/admin/contacts" element={<ContactsAdmin />} />
+          <Route path="/admin/users" element={<UsersAdmin />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }

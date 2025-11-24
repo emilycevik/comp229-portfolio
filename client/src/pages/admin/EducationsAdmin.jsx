@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { api } from "../../api/axios";
 import { useAuth } from "../../context/AuthContext";
 
 export default function EducationsAdmin() {
@@ -12,11 +11,15 @@ export default function EducationsAdmin() {
   });
 
   useEffect(() => {
-    api.get("/api/qualification").then((res) => setEducations(res.data));
+    // 🔥 Lazy-load axios
+    import("../../api/axios").then(({ api }) => {
+      api.get("/api/qualification").then((res) => setEducations(res.data));
+    });
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const { api } = await import("../../api/axios");
     await api.post("/api/qualification", form, {
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -26,6 +29,7 @@ export default function EducationsAdmin() {
   };
 
   const handleDelete = async (id) => {
+    const { api } = await import("../../api/axios");
     await api.delete(`/api/qualification/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });

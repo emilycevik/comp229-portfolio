@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
-import { api } from "../../api/axios";
 
 export default function ProjectsAdmin() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     console.log("Fetching projects...");
-    api
-      .get("/api/project")
-      .then((res) => {
-        console.log("Projects:", res.data);
-        setProjects(res.data);
-      })
-      .catch((err) => console.error("Error loading projects:", err));
+
+    // 🔥 Lazy-load axios only when the admin page opens
+    import("../../api/axios").then(({ api }) => {
+      api
+        .get("/api/project")
+        .then((res) => {
+          console.log("Projects:", res.data);
+          setProjects(res.data);
+        })
+        .catch((err) => console.error("Error loading projects:", err));
+    });
   }, []);
 
   return (

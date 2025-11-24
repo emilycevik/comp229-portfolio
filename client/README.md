@@ -14,3 +14,23 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+
+COMP229 – Portfolio Application (Assignment 3)
+
+Student: Emine Sumeyye Cevik
+Course: COMP229 – Web Application Development
+Semester: Fall 2025
+
+🧩 Overview
+
+This project is a Full Stack MERN Portfolio Application integrating React (frontend), Node.js/Express (backend), and MongoDB (database). It demonstrates API connectivity, CRUD operations, authentication with JWT, and state management through React Context.
+
+🖥️ Tech Stack
+Layer	Technology
+Frontend	React 18, Vite, Axios
+Backend	Node.js, Express.js, MongoDB
+Database	MongoDB Atlas
+Auth	JWT (JSON Web Token)
+Styling	Inline CSS & Tailwind (optional)
